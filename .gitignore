@@ -1,0 +1,6 @@
+# Bash files
+*.sh
+
+# Vim files
+.*.swp
+.*.swo
