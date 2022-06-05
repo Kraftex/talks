@@ -43,6 +43,6 @@ int main ( )
     show_func(s16, length());
     show_func(s32, length());
     show_func(ws,  length());
-    std::cout << "Size: " << "hola"s.size( ) << "\n";
+    //std::cout << "Size: " << "hola"s.size( ) << "\n";
     return 0;
 }

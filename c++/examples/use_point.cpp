@@ -14,113 +14,114 @@ class Point
     #if defined(VERBOSE_POINT) && VERBOSE_POINT
     int id;
     #endif
+
     public:
-        const static Point ORIGIN;
+    const static Point ORIGIN;
+    #if defined(VERBOSE_POINT) && VERBOSE_POINT
+    static int ID;
+    #endif
+    Point ( ) = default; //Dejo al compilador que decida hacer el constructor, que pondrá todo 0.
+    Point ( int x, int y ) //: x{x}, y{y} { } //Otra forma de hacer lo mismo
+    {
+        this->x = x;
+        this->y = y;
         #if defined(VERBOSE_POINT) && VERBOSE_POINT
-        static int ID;
+        id = ID;
+        ID++;
         #endif
-        Point ( ) = default; //Dejo al compilador que decida hacer el constructor, que pondrá todo 0.
-        Point ( int x, int y ) //: x{x}, y{y} { } //Otra forma de hacer lo mismo
-        {
-            this->x = x;
-            this->y = y;
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            id = ID;
-            ID++;
-            #endif
-        }
-        //Una posible implementación del constructor copia sería
-        //  Point ( const Point& p ) : Point( p.x, p.y ) { }
-        Point ( const Point& p ) //Constructor para lvalues y rvalues, a.k.a Constructor Copia
-        {
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            std::cout << "[" << ID << "] Constructor copia\n";
-            #endif
-            this->x = p.x;
-            this->y = p.y;
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            id = ID++;
-            #endif
-        }
-        // Este otro constructor, no tiene mucho sentido aquí pero es el que sirve para
-        //  los rvalues en especificos. Al definir este, el otro no será llamado.
-        Point ( Point&& p )
-        {
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            std::cout << "[" << ID << "] Constructor move\n";
-            #endif
-            this->x = p.x;
-            this->y = p.y;
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            id = ID++;
-            #endif
-        }
-        //Estos últimos dos constructores también se pueden definir de la siguiente forma
-        //  dejando al compilador a cargo de hacer lo que le pedimos.
-        //Point ( const Point& ) = default;
-        //Point ( Point&& ) = default;
-        friend Point operator+ ( Point lhs, const Point& rhs )
-        {
-            //return Point( lhs.x + rhs.x, lhs.y + rhs.y );
-            #if defined(VERBOSE_POINT) && VERBOSE_POINT
-            std::cout << "[" << ID << "] lhs.id: " << lhs.id << "\n";
-            #endif
-            lhs.x += rhs.x;
-            lhs.y += rhs.y;
-            return lhs;
-        }
-        // lhs: left hand side
-        // rhs: right hand side
-        //Con solo implementar < y == como operadores, el resto salen derivandose de esos
-        friend inline bool operator== ( const Point& lhs, const Point& rhs )
-        {
-            return lhs.x == rhs.x && lhs.y == rhs.y;
-        }
-        //También se pueden implementar más parecido a Java
-        //  bool operator< ( const Point& rhshs )
-        friend inline bool operator< ( const Point& lhs, const Point& rhs )
-        {
-            return lhs.x < rhs.x && lhs.y < rhs.y;
-        }
-        //
-        friend std::ostream& operator<< (std::ostream& os, const Point& rhs)
-        {
-            return os << "(" << rhs.x << ", " << rhs.y << ")";
-        }
-        // Si te cuesta mucho aprenderte esto, C++ provee una librería para hacerlo más fácil.
-        // Usando <utility>
-        // Y poniendo: using namespace std::rel_ops;
-        //  Dentro de un ámbito (scope)
-        /* Otra forma de implementarlos pero no es la recomendada
-        inline bool operator!= ( const Point& rhs )
-        {
-            return !(*this == rhs);
-        }*/
-        friend inline bool operator!= ( const Point& lhs, const Point& rhs )
-        {
-            return !(lhs == rhs);
-        }
-        friend inline bool operator> ( const Point& lhs, const Point& rhs )
-        {
-            return rhs < lhs;
-        }
-        friend inline bool operator<= ( const Point& lhs, const Point& rhs )
-        {
-            return !(lhs > rhs);
-        }
-        friend inline bool operator>= ( const Point& lhs, const Point& rhs )
-        {
-            return !(lhs < rhs);
-        }
+    }
+    //Una posible implementación del constructor copia sería
+    //  Point ( const Point& p ) : Point( p.x, p.y ) { }
+    Point ( const Point& p ) //Constructor para lvalues y rvalues, a.k.a Constructor Copia
+    {
         #if defined(VERBOSE_POINT) && VERBOSE_POINT
-        ~Point ( )
-        {
-            std::cout << "[" << id << "] Died\n";
-        }
+        std::cout << "[" << ID << "] Constructor copia\n";
         #endif
-        //Se pueden declarar dentro y definir a fuera
-        friend Point operator/ ( Point& lhs, int rhs );
-        friend Point operator/ ( Point&& lhs, int rhs );
+        this->x = p.x;
+        this->y = p.y;
+        #if defined(VERBOSE_POINT) && VERBOSE_POINT
+        id = ID++;
+        #endif
+    }
+    // Este otro constructor, no tiene mucho sentido aquí pero es el que sirve para
+    //  los rvalues en especificos. Al definir este, el otro no será llamado.
+    Point ( Point&& p )
+    {
+        #if defined(VERBOSE_POINT) && VERBOSE_POINT
+        std::cout << "[" << ID << "] Constructor move\n";
+        #endif
+        this->x = p.x;
+        this->y = p.y;
+        #if defined(VERBOSE_POINT) && VERBOSE_POINT
+        id = ID++;
+        #endif
+    }
+    //Estos últimos dos constructores también se pueden definir de la siguiente forma
+    //  dejando al compilador a cargo de hacer lo que le pedimos.
+    //Point ( const Point& ) = default;
+    //Point ( Point&& ) = default;
+    friend Point operator+ ( Point lhs, const Point& rhs )
+    {
+        //return Point( lhs.x + rhs.x, lhs.y + rhs.y );
+        #if defined(VERBOSE_POINT) && VERBOSE_POINT
+        std::cout << "[" << ID << "] lhs.id: " << lhs.id << "\n";
+        #endif
+        lhs.x += rhs.x;
+        lhs.y += rhs.y;
+        return lhs;
+    }
+    // lhs: left hand side
+    // rhs: right hand side
+    //Con solo implementar < y == como operadores, el resto salen derivandose de esos
+    friend inline bool operator== ( const Point& lhs, const Point& rhs )
+    {
+        return lhs.x == rhs.x && lhs.y == rhs.y;
+    }
+    //También se pueden implementar más parecido a Java
+    //  bool operator< ( const Point& rhshs )
+    friend inline bool operator< ( const Point& lhs, const Point& rhs )
+    {
+        return lhs.x < rhs.x && lhs.y < rhs.y;
+    }
+    //
+    friend std::ostream& operator<< (std::ostream& os, const Point& rhs)
+    {
+        return os << "(" << rhs.x << ", " << rhs.y << ")";
+    }
+    // Si te cuesta mucho aprenderte esto, C++ provee una librería para hacerlo más fácil.
+    // Usando <utility>
+    // Y poniendo: using namespace std::rel_ops;
+    //  Dentro de un ámbito (scope)
+    /* Otra forma de implementarlos pero no es la recomendada
+    inline bool operator!= ( const Point& rhs )
+    {
+        return !(*this == rhs);
+    }*/
+    friend inline bool operator!= ( const Point& lhs, const Point& rhs )
+    {
+        return !(lhs == rhs);
+    }
+    friend inline bool operator> ( const Point& lhs, const Point& rhs )
+    {
+        return rhs < lhs;
+    }
+    friend inline bool operator<= ( const Point& lhs, const Point& rhs )
+    {
+        return !(lhs > rhs);
+    }
+    friend inline bool operator>= ( const Point& lhs, const Point& rhs )
+    {
+        return !(lhs < rhs);
+    }
+    #if defined(VERBOSE_POINT) && VERBOSE_POINT
+    ~Point ( )
+    {
+        std::cout << "[" << id << "] Died\n";
+    }
+    #endif
+    //Se pueden declarar dentro y definir a fuera
+    friend Point operator/ ( Point& lhs, int rhs );
+    friend Point operator/ ( Point&& lhs, int rhs );
 };
 const Point Point::ORIGIN = Point( );
 #if defined(VERBOSE_POINT) && VERBOSE_POINT

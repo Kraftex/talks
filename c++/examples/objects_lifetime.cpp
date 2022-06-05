@@ -3,21 +3,22 @@
 class Dummy
 {
     private:
-        unsigned id;
+    unsigned id;
+
     public:
-        Dummy ( )
-        {
-            std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
-        }
-        Dummy ( unsigned id )
-        {
-            this->id = id;
-            std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
-        }
-        ~Dummy ( )
-        {
-            std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
-        }
+    Dummy ( )
+    {
+        std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
+    }
+    Dummy ( unsigned id )
+    {
+        this->id = id;
+        std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
+    }
+    ~Dummy ( )
+    {
+        std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
+    }
 };
 
 int main ( )

@@ -14,32 +14,33 @@ class Dummy
 {
     //private por defecto
     unsigned id;
+
     public:
-        Dummy ( )
-        {
-            std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
-        }
-        Dummy ( unsigned id )
-        {
-            this->id = id;
-            std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
-        }
-        unsigned get_id ( )
-        {
-            return id;
-        }
-        void do_something ( )
-        {
-            std::cout << "[" << id << "] * ] Objeto Dummy haciendo cosas\n";
-        }
-        std::string to_string ( )
-        {
-            return "Dummy[" + std::to_string(id) + "]";
-        }
-        ~Dummy ( )
-        {
-            std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
-        }
+    Dummy ( )
+    {
+        std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
+    }
+    Dummy ( unsigned id )
+    {
+        this->id = id;
+        std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
+    }
+    unsigned get_id ( )
+    {
+        return id;
+    }
+    void do_something ( )
+    {
+        std::cout << "[" << id << "] * ] Objeto Dummy haciendo cosas\n";
+    }
+    std::string to_string ( )
+    {
+        return "Dummy[" + std::to_string(id) + "]";
+    }
+    ~Dummy ( )
+    {
+        std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
+    }
 };
 
 struct Point2D
@@ -97,7 +98,7 @@ int main ( )
 
 /*
 Resultado usando un Intel(R) Core(TM) i7-8550U
-Compilado en GCC y Clang usando Linux (Elementary OS)
+Compilado en GCC y Clang usando Linux (Elementary OS 6 {64 bits})
 
 Type bool: 1 bytes
 Type char: 1 bytes

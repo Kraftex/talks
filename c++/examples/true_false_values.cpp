@@ -7,35 +7,36 @@ class Dummy
 {
     //private por defecto
     unsigned id;
+
     public:
-        Dummy ( ) : Dummy(0) { }
-        Dummy ( unsigned id )
-        {
-            this->id = id;
-            //std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
-        }
-        unsigned get_id ( )
-        {
-            return id;
-        }
-        void do_something ( )
-        {
-            std::cout << "[" << id << "] * ] Objeto Dummy haciendo cosas\n";
-        }
-        std::string to_string ( )
-        {
-            return "Dummy[" + std::to_string(id) + "]";
-        }
-        ~Dummy ( )
-        {
-            //std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
-        }
-        // No necesita poner el tipo, ya que se sabe que se está cambiando a 'bool'
-        // Esto se hace así, para poder comprobar con un if, si se puede usar el objeto.
-        operator bool ( )
-        {
-            return id != 0;
-        }
+    Dummy ( ) : Dummy(0) { }
+    Dummy ( unsigned id )
+    {
+        this->id = id;
+        //std::cout << "[" << id << "] + ] Se acaba de crear la clase Dummy\n";
+    }
+    unsigned get_id ( )
+    {
+        return id;
+    }
+    void do_something ( )
+    {
+        std::cout << "[" << id << "] * ] Objeto Dummy haciendo cosas\n";
+    }
+    std::string to_string ( )
+    {
+        return "Dummy[" + std::to_string(id) + "]";
+    }
+    ~Dummy ( )
+    {
+        //std::cout << "[" << id << "] - ] Se acaba de destruir la clase Dummy\n";
+    }
+    // No necesita poner el tipo, ya que se sabe que se está cambiando a 'bool'
+    // Esto se hace así, para poder comprobar con un if, si se puede usar el objeto.
+    operator bool ( )
+    {
+        return id != 0;
+    }
 };
 
 int main ( )
